@@ -1,0 +1,23 @@
+[project]
+name = "dio-projeto-python"
+version = "0.1.0"
+description = "Detecção de fraude em transações de cartão de crédito"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26,<3",
+    "scikit-learn>=1.5",
+    "xgboost>=2.1",
+    "shap>=0.46",
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
+    "imbalanced-learn>=0.12",
+    "jupyterlab>=4.3",
+    "ipykernel>=6.29",
+    "nbconvert>=7.16",
+    "nbformat>=5.10",
+]
+
+[tool.uv]
+package = false

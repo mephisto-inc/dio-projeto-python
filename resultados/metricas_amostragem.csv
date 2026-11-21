@@ -1,0 +1,4 @@
+Estratégia,Precisão,Recall,F1,PR AUC
+Sem balanceamento,0.8485,0.5895,0.6957,0.701
+Undersampling,0.0504,0.8737,0.0952,0.5869
+Oversampling,0.0556,0.8737,0.1046,0.6769

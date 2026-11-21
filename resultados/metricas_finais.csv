@@ -1,0 +1,7 @@
+Modelo,Limiar,Precisão,Recall,F1,ROC AUC,PR AUC
+"XGBoost GridSearchCV (limiar 0,3)",0.3,0.8404,0.8316,0.836,0.9714,0.8345
+XGBoost,0.5,0.8556,0.8105,0.8324,0.9752,0.8188
+"XGBoost (limiar 0,3)",0.3,0.7624,0.8105,0.7857,0.9752,0.8188
+"Random Forest (limiar 0,3)",0.3,0.9146,0.7895,0.8475,0.9478,0.8093
+XGBoost (GridSearchCV),0.5,0.8929,0.7895,0.838,0.9714,0.8345
+Random Forest,0.5,0.9583,0.7263,0.8263,0.9478,0.8093
