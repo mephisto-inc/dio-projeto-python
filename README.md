@@ -4,8 +4,6 @@ Projeto do **Desafio de Projeto da DIO**: um notebook completo que carrega a bas
 
 > **Resultado em destaque:** o modelo escolhido foi um **XGBoost ajustado com `GridSearchCV`** e limiar de decisão **0,3**. No conjunto de teste, ele encontrou **79 das 95 fraudes** (recall de **83,16%**), com precisão de **84,04%**, F1 de **83,60%** e PR AUC de **83,45%**.
 
----
-
 ## 📌 O problema
 
 A base tem **284.807 transações**, das quais apenas **492 são fraudes (0,17%)**. As variáveis `V1` a `V28` passaram por PCA para proteger a privacidade; `Time` marca o momento da transação, `Amount` o valor e `Class` a resposta (1 = fraude, 0 = normal).
@@ -18,8 +16,6 @@ Um modelo que responde "não é fraude" para tudo acerta **99,83%** das transaç
 - **PR AUC:** área sob a curva precisão-recall, mais informativa em bases desbalanceadas;
 - **ROC AUC:** capacidade geral de separar as classes.
 
----
-
 ## 📊 Dataset
 
 - **Fonte:** [creditcard.csv](https://storage.googleapis.com/download.tensorflow.org/data/creditcard.csv)
@@ -29,8 +25,6 @@ Um modelo que responde "não é fraude" para tudo acerta **99,83%** das transaç
 - **Duplicatas removidas:** 1.081 linhas, sendo 19 fraudes.
 - **Base final:** 283.726 transações e 473 fraudes (0,1667%).
 - **Separação:** 80% treino (226.980 transações, 378 fraudes) e 20% teste (56.746 transações, 95 fraudes), com `stratify=y`.
-
----
 
 ## 🧪 O que foi feito
 
@@ -47,10 +41,8 @@ Um modelo que responde "não é fraude" para tudo acerta **99,83%** das transaç
 
 - **Duplicatas removidas antes do split.** Se a mesma transação aparecesse no treino e no teste, as métricas ficariam infladas.
 - **Padronização dentro do `Pipeline`.** O `StandardScaler` é ajustado apenas nos dados de treino de cada divisão, evitando vazamento.
-- **Métrica principal: recall da fraude.** Em fraude, deixar passar costuma custar mais caro do que investigar um falso positivo. A precisão entra como contrapeso.
+- **Métrica principal: recall da fraude.** Em fraude, deixar passar custa mais caro do que investigar um falso positivo. A precisão entra como contrapeso.
 - **`random_state=42` em tudo.** O notebook é reprodutível.
-
----
 
 ## 📈 Resultados
 
@@ -106,8 +98,6 @@ As duas estratégias aumentam o recall, mas derrubam a precisão. O melhor camin
 
 ![Efeito do balanceamento](images/10_amostragem.png)
 
----
-
 ## 🔍 O que o SHAP mostrou
 
 As variáveis de maior impacto global foram **V14, V4, V12, V10 e V11**. A importância nativa do XGBoost também coloca **V14** e **V10** no topo.
@@ -116,14 +106,12 @@ As variáveis de maior impacto global foram **V14, V4, V12, V10 e V11**. A impor
 
 Na transação de fraude explicada no notebook, a probabilidade prevista foi **0,9999**. As principais contribuições foram:
 
-- **V14 (+3,44)**, **V12 (+1,76)**, **V10 (+1,44)** e **V4 (+0,86)** empurraram a predição para fraude;
+- **V14 (+3,44)**, **V12 (+1,76)**, **V10 (+1,44)** e **V4 (+0,86)** empurram a predição para fraude;
 - **V8 (−0,52)** e **V13 (−0,48)** puxaram para o lado normal.
 
 ![SHAP waterfall](images/09_shap_waterfall.png)
 
 > Os valores SHAP estão na escala padronizada das variáveis, porque o `StandardScaler` faz parte do `Pipeline`. Eles mostram associação aprendida pelo modelo, não causalidade.
-
----
 
 ## 🔄 O que mudou em relação à aula da Expert
 
@@ -135,8 +123,6 @@ Na transação de fraude explicada no notebook, a probabilidade prevista foi **0
 6. **Comparação entre undersampling e oversampling.** As duas estratégias foram testadas e comparadas pelo recall e pelo F1.
 7. **Pipeline em todos os modelos.** A padronização é ajustada apenas no treino, sem vazamento.
 8. **Semente fixa e resultados salvos.** O notebook roda do início ao fim e deixa as saídas, tabelas e curvas salvas.
-
----
 
 ## 🚀 Como executar
 
@@ -184,8 +170,6 @@ uv run jupyter nbconvert --to notebook --execute --inplace deteccao_fraude.ipynb
 
 `pandas`, `numpy`, `scikit-learn`, `xgboost`, `shap`, `matplotlib`, `seaborn`, `imbalanced-learn`, `jupyterlab`, `ipykernel`, `nbconvert` e `nbformat`. As versões exatas estão no `uv.lock`.
 
----
-
 ## 📁 Estrutura do repositório
 
 ```
@@ -215,8 +199,6 @@ uv run jupyter nbconvert --to notebook --execute --inplace deteccao_fraude.ipynb
     └── metricas_amostragem.csv
 ```
 
----
-
 ## ⚠️ Limitações e próximos passos
 
 - **Split aleatório, não temporal.** Em produção, uma validação por tempo é mais realista, porque o modelo precisa generalizar para transações futuras.
@@ -227,14 +209,13 @@ uv run jupyter nbconvert --to notebook --execute --inplace deteccao_fraude.ipynb
 - **`GridSearchCV` otimizou recall no limiar 0,5.** Uma evolução é usar um scorer customizado no limiar escolhido.
 - **Próximos modelos:** LightGBM, CatBoost e redes neurais tabulares, sempre comparados pelo recall e pelo PR AUC.
 
----
-
 ## ✅ Checklist do desafio
 
 - [x] Notebook roda do início ao fim, sem célula quebrada.
 - [x] Dataset lido pelo link da base, não pelo arquivo local.
+- [x] `creditcard.csv` no `.gitignore` e fora do repositório.
 - [x] Saídas, tabelas e curvas salvas no notebook.
 - [x] README explica problema, preparação, comparação, limiar e SHAP.
 - [x] Todos os arquivos citados no README existem.
 - [x] Projeto reproduzível com `mise` + `uv`.
-- [x] Nenhum commit ou alteração no histórico do git foi feita.
+- [x] Nenhum commit ou alteração no histórico do git foi feito.
